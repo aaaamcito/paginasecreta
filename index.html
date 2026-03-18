@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secreto</title>
+</head>
+<body style="text-align:center; margin-top:100px; font-family:Arial;">
+
+<h2>Ingresa la contraseña 😏</h2>
+
+<input type="password" id="pass" placeholder="Contraseña">
+<button onclick="check()">Entrar</button>
+
+<p id="mensaje"></p>
+
+<script>
+function check() {
+    var password = document.getElementById("pass").value;
+
+    if(password === "veinticinco de abril de 2025") {
+        document.body.innerHTML = "<h1>Tú también me gustas 💕</h1>";
+    } else {
+        document.getElementById("mensaje").innerText = "Contraseña incorrecta 😢";
+    }
+}
+</script>
+
+</body>
+</html>
