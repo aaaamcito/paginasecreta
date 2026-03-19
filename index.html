@@ -12,8 +12,8 @@
             overflow: hidden;
         }
 
-        h2 {
-            font-size: 30px;
+        .hidden {
+            display: none;
         }
 
         .pista {
@@ -52,26 +52,39 @@
                 transform: translateY(100vh);
             }
         }
+
+        #final {
+            font-size: 35px;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
 
-<h2>Ingresa la contraseña 😏</h2>
+<!-- PANTALLA INICIAL -->
+<div id="inicio">
+    <h2>Ingresa la contraseña 😏</h2>
 
-<input type="password" id="pass" placeholder="Contraseña">
-<button onclick="check()">Entrar</button>
+    <input type="password" id="pass" placeholder="Contraseña">
+    <button onclick="check()">Entrar</button>
 
-<p id="mensaje"></p>
+    <p id="mensaje"></p>
 
-<div class="pista">
-💌 Pista:<br><br>
-“La fecha que lo empezó todo… escríbela con palabras 😏”
+    <div class="pista">
+    💌 Pista:<br><br>
+    “La fecha que lo empezó todo… escríbela con palabras 😏”
+    </div>
+</div>
+
+<!-- MENSAJE FINAL -->
+<div id="final" class="hidden">
+    💖 Tú también me gustas 💖
 </div>
 
 <!-- 🎵 AUDIO -->
 <audio id="musica" loop>
-  <source src="Axolotl(MP3_160K).mp3" type="audio/mp3">
+  <source src="musica.mp3" type="audio/mp3">
 </audio>
 
 <script>
@@ -79,10 +92,13 @@ function check() {
     var password = document.getElementById("pass").value;
 
     if(password === "veinticinco de abril de 2025") {
-        document.body.innerHTML = "<h1 style='color:white;'>💖 Tú también me gustas 💖</h1>";
         
+        document.getElementById("inicio").classList.add("hidden");
+        document.getElementById("final").classList.remove("hidden");
+
         document.getElementById("musica").play();
         startHearts();
+
     } else {
         document.getElementById("mensaje").innerText = "Contraseña incorrecta 😢";
     }
