@@ -12,8 +12,10 @@
             overflow: hidden;
         }
 
-        .hidden {
+        #final {
             display: none;
+            font-size: 35px;
+            color: white;
         }
 
         .pista {
@@ -25,16 +27,13 @@
             display: inline-block;
         }
 
-        input {
+        input, button {
             padding: 10px;
             border-radius: 10px;
             border: none;
         }
 
         button {
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
             background: #ff6b81;
             color: white;
             cursor: pointer;
@@ -52,17 +51,11 @@
                 transform: translateY(100vh);
             }
         }
-
-        #final {
-            font-size: 35px;
-            color: white;
-        }
     </style>
 </head>
 
 <body>
 
-<!-- PANTALLA INICIAL -->
 <div id="inicio">
     <h2>Ingresa la contraseña 😏</h2>
 
@@ -72,19 +65,18 @@
     <p id="mensaje"></p>
 
     <div class="pista">
-    💌 Pista:<br><br>
-    “La fecha que lo empezó todo… escríbela con palabras 😏”
+        💌 Pista:<br><br>
+        “La fecha que lo empezó todo… escríbela con palabras 😏”
     </div>
 </div>
 
-<!-- MENSAJE FINAL -->
-<div id="final" class="hidden">
+<div id="final">
     💖 Tú también me gustas 💖
 </div>
 
 <!-- 🎵 AUDIO -->
 <audio id="musica" loop>
-  <source src="musica.mp3" type="audio/mp3">
+  <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -93,10 +85,16 @@ function check() {
 
     if(password === "veinticinco de abril de 2025") {
         
-        document.getElementById("inicio").classList.add("hidden");
-        document.getElementById("final").classList.remove("hidden");
+        document.getElementById("inicio").style.display = "none";
+        document.getElementById("final").style.display = "block";
 
-        document.getElementById("musica").play();
+        // 🔊 Forzar reproducción
+        let audio = document.getElementById("musica");
+        audio.volume = 1;
+        audio.play().catch(() => {
+            console.log("El navegador bloqueó el audio");
+        });
+
         startHearts();
 
     } else {
@@ -107,16 +105,14 @@ function check() {
 function startHearts() {
     setInterval(() => {
         let heart = document.createElement("div");
-        heart.classList.add("heart");
+        heart.className = "heart";
         heart.innerText = "💖";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }, 200);
+        setTimeout(() => heart.remove(), 5000);
+    }, 150);
 }
 </script>
 
