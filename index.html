@@ -69,8 +69,10 @@
 “La fecha que lo empezó todo… escríbela con palabras 😏”
 </div>
 
-<!-- 🎵 TU MÚSICA -->
-<iframe width="0" height="0" src="https://www.youtube.com/embed/f-y4SusrNeU?autoplay=1&loop=1&playlist=f-y4SusrNeU" frameborder="0" allow="autoplay"></iframe>
+<!-- 🎵 AUDIO -->
+<audio id="musica" loop>
+  <source src="Axolotl(MP3_160K).mp3" type="audio/mp3">
+</audio>
 
 <script>
 function check() {
@@ -78,6 +80,8 @@ function check() {
 
     if(password === "veinticinco de abril de 2025") {
         document.body.innerHTML = "<h1 style='color:white;'>💖 Tú también me gustas 💖</h1>";
+        
+        document.getElementById("musica").play();
         startHearts();
     } else {
         document.getElementById("mensaje").innerText = "Contraseña incorrecta 😢";
