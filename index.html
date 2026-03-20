@@ -4,7 +4,9 @@
     <title>Secreto</title>
     <style>
         body {
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
             text-align: center;
             margin-top: 100px;
             font-family: Arial;
@@ -12,10 +14,22 @@
             overflow: hidden;
         }
 
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
         #final {
             display: none;
             font-size: 35px;
             color: white;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        .show {
+            opacity: 1 !important;
         }
 
         .pista {
@@ -42,14 +56,40 @@
         .heart {
             position: fixed;
             top: -10px;
-            font-size: 24px;
+            font-size: 20px;
             animation: fall linear infinite;
+            opacity: 0.8;
         }
 
         @keyframes fall {
             to {
                 transform: translateY(100vh);
             }
+        }
+
+        /* 💓 LATIDO */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* ✨ EFECTO HOVER */
+        .tefy-link {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            color: #ff6b81;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 18px;
+            animation: pulse 1.5s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .tefy-link:hover {
+            transform: scale(1.3);
+            text-shadow: 0 0 10px #ff6b81;
         }
     </style>
 </head>
@@ -67,6 +107,8 @@
     <div class="pista">
         💌 Pista:<br><br>
         “4:52 am”
+        <br><br>
+        “Tal vez necesitas un código… 😏”
     </div>
 </div>
 
@@ -74,7 +116,6 @@
     💖 Tú también me gustas y mucho muuuchoooo 💖
 </div>
 
-<!-- 🎵 AUDIO -->
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
@@ -86,14 +127,16 @@ function check() {
     if(password === "veintidos de marzo de 2025") {
         
         document.getElementById("inicio").style.display = "none";
-        document.getElementById("final").style.display = "block";
+        let final = document.getElementById("final");
+        final.style.display = "block";
 
-        // 🔊 Forzar reproducción
+        setTimeout(() => {
+            final.classList.add("show");
+        }, 100);
+
         let audio = document.getElementById("musica");
         audio.volume = 1;
-        audio.play().catch(() => {
-            console.log("El navegador bloqueó el audio");
-        });
+        audio.play().catch(() => {});
 
         startHearts();
 
@@ -106,27 +149,19 @@ function startHearts() {
     setInterval(() => {
         let heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerText = "💖 💕 💞";
+        heart.innerText = "💖";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
         document.body.appendChild(heart);
 
         setTimeout(() => heart.remove(), 5000);
-    }, 150);
+    }, 120);
 }
 </script>
 
-    <!-- 🔥 LINK SECRETO A codigo.html -->
-<a href="codigo.html" style="
-position: absolute;
-bottom: 10px;
-right: 10px;
-width: 20px;
-height: 20px;
-opacity: 0;
-cursor: pointer;
-">
+<a href="codigo.html" class="tefy-link">
+Tefy 💕
 </a>
-    
+
 </body>
 </html>
